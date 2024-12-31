@@ -1,0 +1,270 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+}
+
+header {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+#about {
+    background-color: #f8f9fa;
+    padding: 40px 20px;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#about h2 {
+    color: #dc3545;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#about p {
+    line-height: 1.6;
+    color: #333;
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+/* Importance section styling */
+.importance {
+    background-color: #fff3cd;
+    padding: 40px 20px;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.importance h2 {
+    color: #856404;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.importance ul {
+    margin: 20px 0;
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.importance ul li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+    color: #333;
+}
+
+/* Features section styling */
+.features {
+    background-color: #e9ecef;
+    padding: 40px 20px;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.features h2 {
+    color: #17a2b8;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.features ul {
+    margin: 20px 0;
+    padding-left: 20px;
+    list-style-type: square;
+}
+
+.features ul li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+    color: #333;
+}
+
+/* Call-to-action section styling */
+.call-to-action {
+    background-color: #f8d7da;
+    padding: 40px 20px;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.call-to-action h2 {
+    color: #721c24;
+    margin-bottom: 20px;
+}
+
+.call-to-action p {
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.call-to-action .btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.call-to-action .btn:hover {
+    background-color: #c82333;
+}
+
+/* Donors section styling */
+#donors {
+    background-color: #d4edda;
+    padding: 40px 20px;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#donors h2 {
+    color: #155724;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#donors p {
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#donors ul {
+    margin: 20px 0;
+    padding-left: 20px;
+    list-style-type: circle;
+    text-align: center;
+}
+
+#donors ul li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+    color: #333;
+}
+
+
+.hero {
+    background-image: url('blood-donation.jpg');
+    background-size: cover;
+    color: white;
+    text-align: center;
+    padding: 50px 0;
+}
+form {
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    max-width: 400px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #e63939;
+}
+.user-image {
+    display: block;
+    margin: 10px auto; /* Center the image */
+    width: 100px; /* Set a fixed width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Make it circular */
+    border: 2px solid white; /* Optional: add a border */
+}
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #ff4d4d;
+    color: white;
+}
+.logo{
+    display: flex;
+    flex-direction: left;
+    width: 80px;;
+    height: 90px;
+}
+.freedom-fighter-image {
+    position: absolute; 
+    top: 10px;
+    right: 10px; 
+    width: 80px; 
+    height: auto; 
+    border-radius: 5px;
+}
+.scrolling-info {
+    background-color: #ff4d4d; /* Light red background for visibility */
+    color: #333;
+    padding: 10px;
+    white-space: nowrap; 
+    overflow: hidden; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    animation: scroll 20s linear infinite; 
+}
+@keyframes scroll {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+.forgot-password-link {
+    display: block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.forgot-password-link:hover {
+    text-decoration: underline;
+}
