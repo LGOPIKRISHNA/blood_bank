@@ -6,22 +6,18 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
 }
 
 include 'db.php';
-
+$stmt = $conn->prepare("INSERT INTO site_views (view_date) VALUES (NOW())");
+$stmt->execute();
 // Fetch data for registered users, site views, and blood group info
 // Registered Users
 $result_users = $conn->query("SELECT COUNT(*) AS total_users FROM users");
 $total_users = $result_users->fetch_assoc()['total_users'];
 
 // Site Views in the Last Week
+// Site Views in the Last Week
 $last_week = date('Y-m-d', strtotime('-1 week'));
 $result_views = $conn->query("SELECT COUNT(*) AS total_views FROM site_views WHERE view_date >= '$last_week'");
 $total_views = $result_views->fetch_assoc()['total_views'];
-
-$sql = "SELECT blood_groups.blood_group, GROUP_CONCAT(users.username) AS donors, SUM(blood_groups.quantity) AS total_quantity 
-        FROM blood_groups 
-        LEFT JOIN users ON blood_groups.id = users.id 
-        GROUP BY blood_groups.blood_group";
-$result_blood_groups = $conn->query($sql);
 
 // Blood Group Information
 $result_blood_groups = $conn->query("SELECT blood_group, SUM(quantity) AS total_quantity FROM blood_groups GROUP BY blood_group");
@@ -116,6 +112,10 @@ $result_blood_groups = $conn->query("SELECT blood_group, SUM(quantity) AS total_
             bottom: 0;
             width: 100%;
         }
+        .dashboard-box button a {
+    text-decoration: none;
+    color: black;
+}
     </style>
 </head>
 <body>
@@ -129,14 +129,15 @@ $result_blood_groups = $conn->query("SELECT blood_group, SUM(quantity) AS total_
     <div class="dashboard-container">
         <!-- Registered Users Box -->
         <div class="dashboard-box">
-            <h3>Registered Users</h3>
-            <p class="count"><?php echo $total_users; ?></p>
-            <p>Total users who have signed up.</p>
-        </div>
+    <h3>Registered Users</h3>
+    <p class="count"><?php echo $total_users; ?></p>
+    <p>Total users who have signed up.</p>
+    <button><a href="user_details.php">View Details</a></button>
+</div>
 
         <!-- Site Views Box -->
         <div class="dashboard-box">
-            <h3>Site Views in the Last Week</h3>
+            <h3>Site Visited in the Last Week</h3>
             <p class="count"><?php echo $total_views; ?></p>
             <p>Total views from the last 7 days.</p>
         </div>
@@ -155,7 +156,7 @@ $result_blood_groups = $conn->query("SELECT blood_group, SUM(quantity) AS total_
     <?php endif; ?>
 </div>
 <div class="dashboard-box">
-            <h3>Registered users</h3>
+            <h3>Available Blood Groups</h3>
             <button><a href="blood_groups.php">Donors</a></button>
         </div>
     </div>
