@@ -75,6 +75,22 @@ $blood_donated = $result1->num_rows; // Count the number of rows returned
             border: none;
             border-radius: 5px;
         }
+        .info-slide {
+    background-color: #f9f9f9; /* Light gray background for info slides */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 20px; /* Padding inside the slide */
+    margin: 10px 0; /* Margin above and below the slide */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.info-slide h3 {
+    color: #007BFF; /* Blue color for headings */
+}
+
+.info-slide p {
+    color: #333; /* Dark gray color for text */
+}
         /* Table Styles */
 table {
     width: 100%;
@@ -205,12 +221,27 @@ h1 {
                                     </div>
                                 </div>
                         
+
+                                
                                 <div class="slider-buttons">
                                     <button class="slider-button" onclick="changeSlide(-1)">Previous</button>
                                     <button class="slider-button" onclick="changeSlide(1)">Next</button>
                                 </div>
+                                
                             </main>
-                        
+                            <div class="info-slide">
+    <h3>About Our Blood Bank</h3>
+    <p>Our blood bank is dedicated to saving lives by ensuring a steady supply of safe blood for those in need. We operate under strict safety protocols to ensure the health and safety of both donors and recipients. Our team is committed to promoting voluntary blood donation and raising awareness about the importance of donating blood.</p>
+</div>
+
+<div class="info-slide">
+    <h3>Upcoming Blood Donation Camp</h3>
+    <p><strong>Event:</strong> Blood Donation Camp</p>
+    <p><strong>Date:</strong> In 20 days from today</p>
+    <p><strong>Locations:</strong> Delhi, Mumbai, Hyderabad, Andhra Pradesh</p>
+    <p><strong>Purpose:</strong> To collect blood donations to support patients in need, especially those suffering from conditions like thalassemia and cancer.</p>
+    <p><strong>Call to Action:</strong> We encourage everyone eligible to participate and help save lives!</p>
+</div>
                             <footer>
                                 <p>&copy; 2024 Blood Bank. All rights reserved.</p>
                             </footer>
