@@ -6,9 +6,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $blood_group = $_POST['blood_group'];
     $quantity = $_POST['quantity'];
     $location = $_POST['location'];
+    $email = $_POST['email'];
 
-    $stmt = $conn->prepare("INSERT INTO blood_groups (username, blood_group, quantity, location) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssis", $username, $blood_group, $quantity, $location);
+    $stmt = $conn->prepare("INSERT INTO blood_groups (username, blood_group, quantity, location,email) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssiss", $username, $blood_group, $quantity, $location, $email);
 
     if ($stmt->execute()) {
         echo "Blood group added successfully!";

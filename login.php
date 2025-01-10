@@ -9,9 +9,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Check if the entered username and password are "admin"
     if ($username === 'admin' && $password === 'admin') {
-        // Set session variables
+        // Set session variables for admin
         $_SESSION['username'] = $username;
-        $_SESSION['is_admin'] = true; // Set the admin session
+        $_SESSION['is_admin'] = true;
+        $_SESSION['role'] = 'admin'; // Set the role to 'admin'
 
         // Redirect to the admin page
         header("Location: admin.php");
@@ -32,11 +33,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Set session variables for regular user
                 $_SESSION['username'] = $user['username'];
 
-                // Check if the user is an admin and redirect accordingly
+                // Check if the user is an admin and set the role accordingly
                 if ($user['is_admin'] == 1) {
-                    $_SESSION['is_admin'] = true;
-                    header("Location: admin.php");
+                    $_SESSION['role'] = 'admin'; // Set the role to 'admin'
+                    header("Location: admin.php"); // Redirect to the admin page
                 } else {
+                    $_SESSION['role'] = 'user'; // Set the role to 'user'
                     header("Location: user.php"); // Redirect to the user dashboard
                 }
                 exit();
@@ -64,32 +66,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </header>
 
     <main>
-        <!-- <form action="login.php" method="POST">
-            <label for="username">Username:</label>
-            <input type="text" name="username" required>
-            <br>
-
-            <label for="password">Password:</label>
-            <input type="password" name="password" required>
-            <br>
-
-            <button type="submit">Login</button>
-            
-        </form>-->
-
         <div id="loginForm">
-    <h2>Login</h2>
-    <form action="login.php" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <button type="submit">Login</button>
-        <p>
-            <a href="forgot_password.php" class="forgot-password-link">Forgot Password?</a>
-        </p>
-    </form>
-</div>
+            <h2>Login</h2>
+            <form action="login.php" method="POST">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Login</button>
+                <p>
+                    <a href="forgot_password.php" class="forgot-password-link">Forgot Password?</a>
+                </p>
+            </form>
+        </div>
 
         <p>Don't have an account? <a href="signup.php">Sign up</a></p>
     </main>

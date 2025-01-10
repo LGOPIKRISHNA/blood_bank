@@ -110,7 +110,7 @@ session_start();
         </section>
 
        
-        <section id="donors">
+        <!-- <section id="donors">
             <h2>Our Valued Donors</h2>
             <p>We are grateful to the following individuals for their generous contributions:</p>
             <ul>
@@ -123,7 +123,7 @@ session_start();
                 <li>Chris Lee</li>
                 <li>Jessica Taylor</li>
             </ul>
-        </section>
+        </section> -->
     </main>
 
     <footer>

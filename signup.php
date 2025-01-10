@@ -42,7 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt = $conn->prepare("INSERT INTO users (username, email, password, user_image) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("ssss", $username, $email, $password, $target_file); // Save relative path
             if ($stmt->execute()) {
-                echo "Signup successful! You can now log in.";
+                echo "Signup successful! You can now log in. You will be redirected in 2 seconds.";
+    echo '<meta http-equiv="refresh" content="2;url=login.php">';
+    exit();
             } else {
                 echo "Error: " . $stmt->error;
             }

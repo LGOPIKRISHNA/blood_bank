@@ -1,0 +1,3 @@
+add phn number and email id in admin page --> avaulable blood group
+add phn number and address in sign up page
+add some more boxes in adminpage

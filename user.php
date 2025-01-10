@@ -1,7 +1,18 @@
 <?php
 session_start();
 if (!isset($_SESSION['username'])) {
+
     header("Location: index.php");
+    $query3 = "SELECT * FROM requests WHERE user_email = ? AND status = 'pending'";
+    $stmt3 = $conn->prepare($query3);
+    $stmt3->bind_param("s", $username);
+    $stmt3->execute();
+    $result3 = $stmt3->get_result();
+
+    if ($result3->num_rows > 0) {
+        // Display the notification message
+        echo "<div class='notification'>You have pending requests for blood donation. Please check your email.</div>";
+    }
     exit();
 }
 
@@ -9,9 +20,13 @@ include 'db.php'; // Include the database connection
 
 // Fetch user details including the image
 $username = $_SESSION['username'];
+// $email = htmlspecialchars($user['email'], ENT_QUOTES);
+
+// Store email in session
+// $email=$_SESSION['email'];
 
 // Prepare the SQL query to fetch blood donation records for the user
-$query1 = "SELECT blood_group, quantity, location FROM blood_groups WHERE username = ?"; // Ensure the column name matches your DB
+$query1 = "SELECT blood_group, quantity, location,email FROM blood_groups WHERE username = ?"; // Ensure the column name matches your DB
 $stmt1 = $conn->prepare($query1);
 $stmt1->bind_param("s", $username);
 $stmt1->execute();
@@ -31,6 +46,9 @@ $email = htmlspecialchars($user['email'], ENT_QUOTES);
 
 // Calculate the number of donations
 $blood_donated = $result1->num_rows; // Count the number of rows returned
+
+
+
 
 ?>
 
@@ -215,6 +233,9 @@ h1 {
                                                 <input type="number" name="quantity" id="quantity" required>
                                                 <label for="location">Location:</label>
                                                 <input type="text" name="location" id="location" required>
+                                                <label for="email">Email:</label>
+                                                <input type="text" name="email" id="email" value="<?php echo $email; ?> " readonly>
+
                                                 <button type="submit">Add Blood Group</button>
                                             </form>
                                         </div>
@@ -224,9 +245,13 @@ h1 {
 
                                 
                                 <div class="slider-buttons">
-                                    <button class="slider-button" onclick="changeSlide(-1)">Previous</button>
-                                    <button class="slider-button" onclick="changeSlide(1)">Next</button>
-                                </div>
+    <button class="slider-button" onclick="changeSlide(-1)">Previous</button>
+    <button class="slider-button" onclick="changeSlide(1)">Next</button>
+    <form action="generate_report.php" method="POST" style="display:inline;">
+        <input type="hidden" name="username" value="<?php echo htmlspecialchars($username, ENT_QUOTES); ?>">
+        <button type="submit" class="slider-button">Generate Report</button>
+    </form>
+</div>
                                 
                             </main>
                             <div class="info-slide">

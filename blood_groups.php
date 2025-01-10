@@ -1,8 +1,16 @@
 <?php
+session_start(); // Start the session
+
+// Check if the user is logged in and is an admin
+if (!isset($_SESSION['username']) || $_SESSION['role'] != 'admin') {
+    echo "You must be an admin to view this page.";
+    exit(); // Stop execution if the user is not an admin
+}
+
 include 'db.php'; // Include the database connection
 
-// Fetch blood groups from the database
-$query = "SELECT * FROM blood_groups";
+// Fetch blood groups from the database including the email field
+$query = "SELECT blood_group, quantity, location, email FROM blood_groups";
 $result = $conn->query($query);
 ?>
 
@@ -15,38 +23,81 @@ $result = $conn->query($query);
     <link rel="stylesheet" href="styles.css">
     <style>
         /* Table Styles */
-table {
-    width: 100%;
-    border-collapse: collapse; /* Merge borders */
-    margin-top: 20px; /* Space above the table */
-}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
 
-th, td {
-    padding: 12px; /* Space inside cells */
-    text-align: left; /* Align text to the left */
-    border: 1px solid #ddd; /* Light gray border */
-}
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
 
-th {
-    background-color: #007BFF; /* Blue background for header */
-    color: white; /* White text for header */
-}
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2; /* Light gray for even rows */
-}
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
 
-tr:hover {
-    background-color: #ddd; /* Darker gray on hover */
-}
+        tr:hover {
+            background-color: #ddd;
+        }
 
-h1 {
-    margin-top: 20px; /* Space above the heading */
-    color: #333; /* Dark gray color for headings */
-}
+        h1 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        /* Download Button Styles */
+        .download-button {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .download-button:hover {
+            background-color: #218838;
+        }
+
+        /* Request Button Styles */
+        .request-button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .request-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Notification Styles */
+        .notification {
+            background-color: #ffcc00;
+            color: black;
+            padding: 10px;
+            margin: 20px 0;
+            border: 1px solid #e7b100;
+        }
     </style>
 </head>
 <body>
+    <!-- Display Download Button only for Admin -->
+    <?php if ($_SESSION['role'] == 'admin'): ?>
+        <a href="download_report.php" class="download-button">Download Report</a>
+    <?php endif; ?>
+
     <h1>Available Blood Groups</h1>
     <table>
         <thead>
@@ -54,14 +105,23 @@ h1 {
                 <th>Blood Group</th>
                 <th>Quantity</th>
                 <th>Location</th>
+                <th>Email</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <?php while ($row = $result->fetch_assoc()): ?>
                 <tr>
-                    <td><?php echo $row['blood_group']; ?></td>
-                    <td><?php echo $row['quantity']; ?></td>
-                    <td><?php echo $row['location']; ?></td>
+                    <td><?php echo htmlspecialchars($row['blood_group'], ENT_QUOTES); ?></td>
+                    <td><?php echo htmlspecialchars($row['quantity'], ENT_QUOTES); ?></td>
+                    <td><?php echo htmlspecialchars($row['location'], ENT_QUOTES); ?></td>
+                    <td><?php echo htmlspecialchars($row['email'], ENT_QUOTES); ?></td>
+                    <td>
+                        <form action="send_request.php" method="POST">
+                            <input type="hidden" name="email" value="<?php echo htmlspecialchars($row['email'], ENT_QUOTES); ?>">
+                            <button type="submit" class="request-button">Request</button>
+                        </form>
+                    </td>
                 </tr>
             <?php endwhile; ?>
         </tbody>
